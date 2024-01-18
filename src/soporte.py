@@ -2,6 +2,16 @@ import csv
 
 def calculate_mortage(due, interest, monthly_payment, yearly_extra_payment, name_csv): # We define the function with the parameters that will be established in the main.py file
     
+    """This function receives five parameters:
+    - due (float): the total amount due.
+    - interest (float): the monthly interest rate
+    - monthly_payment (float): the amount paid each month
+    - yearly_extra_payment (float): the extra amout that is paid every 12 months
+    - name_csv (str): the name in which we want to save the CSV file that will contain the output
+    
+    The output is a print that shows the different information for each month until the mortgage is totally paid off."""
+
+
     month = 1 # We set the month variable to 1
 
     #We create a csv to write the information on it
