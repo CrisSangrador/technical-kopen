@@ -18,8 +18,9 @@ def calculate_mortage(due, interest, monthly_payment, yearly_extra_payment, name
     with open(name_csv, "w", newline = "") as file:
         writer = csv.writer(file)
 
-    # We add the headers to the csv file
+    # We add the headers to the csv file as well as the first row
         writer.writerow(["Month", "Interest", "Due", "Due with interest", "To pay"])
+        writer.writerow([month, (due * interest), due, (due + (due * interest)), monthly_payment])
 
     # We print the first month's information
 
@@ -34,7 +35,7 @@ def calculate_mortage(due, interest, monthly_payment, yearly_extra_payment, name
         if month % 12 == 0: # We create an 'if' condition so if the number of the month is divisible by 12 to add the yearly extra payment if necessary
             
             # We calculate the new due amount by substracting the monthly and yearly payment
-            due = due + (due * interest) - monthly_payment - yearly_extra_payment 
+            due = due + (due * interest) - (monthly_payment + yearly_extra_payment )
 
             # We calculate the due amount with the interest rate
             due_with_interest = due + (due * interest)
