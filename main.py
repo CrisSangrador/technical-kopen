@@ -1,4 +1,4 @@
-from src.soporte import calculate_mortage
+from src.support import calculate_mortage
 
 # We define the mortgage parameters
 
