@@ -32,37 +32,26 @@ def calculate_mortage(due, interest, monthly_payment, yearly_extra_payment, name
         
         month += 1 # We add a month for each time the loop runs
 
+        payment = monthly_payment
+
         if month % 12 == 0: # We create an 'if' condition so if the number of the month is divisible by 12 to add the yearly extra payment if necessary
             
-            # We calculate the new due amount by substracting the monthly and yearly payment
-            due = due + (due * interest) - (monthly_payment + yearly_extra_payment )
+            payment = monthly_payment + yearly_extra_payment
 
-            # We calculate the due amount with the interest rate
-            due_with_interest = due + (due * interest)
 
-            # We print the month's information
-            print(f"Month: {month}, interest: {due * interest:.2f}, due: {due:.2f}, due + interest: {due_with_interest:.2f}, to pay {monthly_payment + yearly_extra_payment}")
+        due_with_interest = due + (due * interest)
 
-            # We write the info in the CSV
-            with open(name_csv, "a", newline = "") as file:
-                writer = csv.writer(file)
-                writer.writerow([month, (due * interest), due, due_with_interest, (monthly_payment + yearly_extra_payment)])
+        print(f"Month: {month}, interest: {due * interest:.2f}, due: {due:.2f}, due + interest: {due_with_interest:.2f}, to pay {payment}")
 
-        else: # If the number of the month is not divisible by 12
+                    # We write the info in the CSV
+        with open(name_csv, "a", newline = "") as file:
+            writer = csv.writer(file)
+            writer.writerow([month, (due * interest), due, due_with_interest, (payment)])
 
-            # We calculate the new due amount by substracting the monthly payment to the previous due amount + interest
-            due = due + (due * interest) - monthly_payment
+        # We calculate the new due amount by substracting the monthly and yearly payment
+        
+        due = due_with_interest - (payment)
 
-            # We calculate the due amount with the interest rate
-            due_with_interest = due + (due * interest)
-
-            # We print the month's information
-            print(f"Month: {month}, interest: {due * interest:.2f}, due: {due:.2f}, due + interest: {due + (due * interest):.2f}, to pay {monthly_payment}")
-
-            # We write the info in the CSV
-            with open(name_csv, "a", newline = "") as file:
-                writer = csv.writer(file)
-                writer.writerow([month, (due * interest), due, due_with_interest, monthly_payment])
 
     else: # Once the due amount is less than the monthly payment
 
